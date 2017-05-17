@@ -1,0 +1,22 @@
+﻿@model VideoRentalShop.ViewModels.RandomMovieViewModel
+@{
+    ViewBag.Title = "allCustomers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>All Customers</h2>
+@if(Model.Customer.Count == 0)
+{
+    <text>No customers yet.</text>
+} else
+{
+    <table class="table table-striped 	  table-­bordered	  table‐hover">
+        <thead><tr><th>Customer Name</th></tr></thead>
+        <tbody>
+            @foreach(var customer in Model.Customer)
+            {
+                <tr><td>@Html.ActionLink(@customer.name, "Customer", "Details", new { id = 1 });</td></tr>
+                
+            }
+        </tbody>
+    </table>
+}

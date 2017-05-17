@@ -1,0 +1,22 @@
+﻿@model Vishop.ViewModels.RandomMovieViewModel
+@{
+    ViewBag.Title = "Customers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>All Customers</h2>
+@if(Model.Customer.Count == 0)
+{
+    <text>No customers yet.</text>
+} else
+{
+    <table class="table table-striped 	  table-­bordered	  table‐hover">
+        <thead><tr><th>Customer Name</th></tr></thead>
+        <tbody>
+            @foreach(var customer in Model.Customer)
+            {
+
+                               <tr><td>@Html.ActionLink(@customer.name, "Details", "Customer", new { id = customer.id }, null);</td></tr>
+            }
+        </tbody>
+    </table>
+}
