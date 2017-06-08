@@ -8,4 +8,15 @@
 
 <h2>@Model.name</h2>
 
-<h3> About the customer</h3>
+
+    <ul>
+@if(Model.birthdate != null)
+{
+    <li> Birtdate: @String.Format("{0:M/d/yyyy}", Model.birthdate);</li>
+
+}
+@if(Model.membershipType != null)
+{
+    <li>Membership type:  @Model.membershipType.name</li>
+}
+    </ul>

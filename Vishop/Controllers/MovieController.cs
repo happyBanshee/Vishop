@@ -5,18 +5,27 @@ using System.Web;
 using System.Web.Mvc;
 using Vishop.Models;
 using Vishop.ViewModels;
+using System.Data.Entity;
+
 
 namespace Vishop.Controllers
 {
     public class MovieController : Controller
     {
         // GET: Movies
+        private ApplicationDbContext _context;
+        public MovieController()
+        {
+            _context = new ApplicationDbContext();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
         public ActionResult AllMovies()
         {
-            var movie = new List<Movie> {
-                new Movie { name ="Stepford wives"},
-                new Movie { name ="Dark Tower"}
-            };
+            List<Movie> movie  = _context.Movies.ToList();
 
             var viewModel = new RandomMovieViewModel {
                 Movie = movie
@@ -24,5 +33,14 @@ namespace Vishop.Controllers
 
             return View(viewModel);
         }
+        [Route("movie/details/{id}")]
+        public ActionResult Details(int id)
+        {
+            var movie = _context.Movies.Include(m=>m.genre).SingleOrDefault(c => c.id == id);
+
+            return View(movie);
+        }
+
+
     }
 }

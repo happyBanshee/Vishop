@@ -13,13 +13,22 @@
     <text>No movies yet.</text>
 } else
 {
-    <table class="table table-striped table-­bordered	  table‐hover">
-        <thead><tr><th>Movie Name</th></tr></thead>
+    <table class="table table-striped table-­bordered
+  table‐hover">
+        <thead>
+            <tr>
+                <th>Movie Name</th>
+                <th>Genre</th>
+            </tr>
+        </thead>
         <tbody>
             @foreach(var movie in Model.Movie)
             {
-                <tr><td>"@movie.name"</td></tr>
+                <tr>
+                    <td>@Html.ActionLink(@movie.name, "Details", "Movie", new { id = movie.id }, null)</td>
+                    <td>@movie.genre</td>
+                </tr>
             }
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 }

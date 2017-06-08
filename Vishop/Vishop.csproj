@@ -196,10 +196,61 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705171453041_InitialModel.cs" />
+    <Compile Include="Migrations\201705171453041_InitialModel.Designer.cs">
+      <DependentUpon>201705171453041_InitialModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705171927422_addMembershipType.cs" />
+    <Compile Include="Migrations\201705171927422_addMembershipType.Designer.cs">
+      <DependentUpon>201705171927422_addMembershipType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705181649290_PopulateMembershipTypes.cs" />
+    <Compile Include="Migrations\201705181649290_PopulateMembershipTypes.Designer.cs">
+      <DependentUpon>201705181649290_PopulateMembershipTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706021531585_addNameToMembershipType.cs" />
+    <Compile Include="Migrations\201706021531585_addNameToMembershipType.Designer.cs">
+      <DependentUpon>201706021531585_addNameToMembershipType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706021542272_popuateNameToMembershipType.cs" />
+    <Compile Include="Migrations\201706021542272_popuateNameToMembershipType.Designer.cs">
+      <DependentUpon>201706021542272_popuateNameToMembershipType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706072018038_addBirthdateToMemeber.cs" />
+    <Compile Include="Migrations\201706072018038_addBirthdateToMemeber.Designer.cs">
+      <DependentUpon>201706072018038_addBirthdateToMemeber.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706072106038_seedCustomerTable2.cs" />
+    <Compile Include="Migrations\201706072106038_seedCustomerTable2.Designer.cs">
+      <DependentUpon>201706072106038_seedCustomerTable2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706072114489_addFieldsToMovie.cs" />
+    <Compile Include="Migrations\201706072114489_addFieldsToMovie.Designer.cs">
+      <DependentUpon>201706072114489_addFieldsToMovie.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706081203507_seedMovies.cs" />
+    <Compile Include="Migrations\201706081203507_seedMovies.Designer.cs">
+      <DependentUpon>201706081203507_seedMovies.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706081238120_populateGenresTable.cs" />
+    <Compile Include="Migrations\201706081238120_populateGenresTable.Designer.cs">
+      <DependentUpon>201706081238120_populateGenresTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706081247313_populateGenresIdToMovies.cs" />
+    <Compile Include="Migrations\201706081247313_populateGenresIdToMovies.Designer.cs">
+      <DependentUpon>201706081247313_populateGenresIdToMovies.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706081251368_setGenreToMovie.cs" />
+    <Compile Include="Migrations\201706081251368_setGenreToMovie.Designer.cs">
+      <DependentUpon>201706081251368_setGenreToMovie.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Genres.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MembershipType.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -269,6 +320,7 @@
     <Content Include="Views\Customer\Details.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Movie\allMovies.cshtml" />
+    <Content Include="Views\Movie\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -287,6 +339,44 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201705171453041_InitialModel.resx">
+      <DependentUpon>201705171453041_InitialModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705171927422_addMembershipType.resx">
+      <DependentUpon>201705171927422_addMembershipType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705181649290_PopulateMembershipTypes.resx">
+      <DependentUpon>201705181649290_PopulateMembershipTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706021531585_addNameToMembershipType.resx">
+      <DependentUpon>201706021531585_addNameToMembershipType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706021542272_popuateNameToMembershipType.resx">
+      <DependentUpon>201706021542272_popuateNameToMembershipType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706072018038_addBirthdateToMemeber.resx">
+      <DependentUpon>201706072018038_addBirthdateToMemeber.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706072106038_seedCustomerTable2.resx">
+      <DependentUpon>201706072106038_seedCustomerTable2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706072114489_addFieldsToMovie.resx">
+      <DependentUpon>201706072114489_addFieldsToMovie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706081203507_seedMovies.resx">
+      <DependentUpon>201706081203507_seedMovies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706081238120_populateGenresTable.resx">
+      <DependentUpon>201706081238120_populateGenresTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706081247313_populateGenresIdToMovies.resx">
+      <DependentUpon>201706081247313_populateGenresIdToMovies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706081251368_setGenreToMovie.resx">
+      <DependentUpon>201706081251368_setGenreToMovie.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
