@@ -1,5 +1,4 @@
-﻿@*@model Vishop.Models.Movie*@
-@model Vishop.ViewModels.RandomMovieViewModel
+﻿@model IEnumerable<Vishop.Models.Movie>
 
 @{
     ViewBag.Title = "AllMovies";
@@ -8,13 +7,13 @@
 
 <h2>All movies</h2>
 
-@if(Model.Movie.Count == 0)
+@if(!Model.Any())
 {
     <text>No movies yet.</text>
 } else
 {
-    <table class="table table-striped table-­bordered
-  table‐hover">
+    @Html.ActionLink("Add new","New","Movie",new { },new { @class="btn btn-primary"})
+    <table class="table table-striped table-­bordered table‐hover">
         <thead>
             <tr>
                 <th>Movie Name</th>
@@ -22,11 +21,11 @@
             </tr>
         </thead>
         <tbody>
-            @foreach(var movie in Model.Movie)
+            @foreach(var movie in Model)
             {
                 <tr>
-                    <td>@Html.ActionLink(@movie.name, "Details", "Movie", new { id = movie.id }, null)</td>
-                    <td>@movie.genre</td>
+                    <td>@Html.ActionLink(movie.name, "Edit", "Movie", new { id = movie.id }, null)</td>
+                    <td>@movie.Genre.name</td>
                 </tr>
             }
             </tbody>

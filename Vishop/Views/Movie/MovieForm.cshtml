@@ -1,0 +1,29 @@
+﻿@model Vishop.ViewModels.MovieViewModel
+@{
+    ViewBag.Title = Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Title</h2>
+@using(Html.BeginForm("Save", "Movie"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Movie.name)
+        @Html.TextBoxFor(m => m.Movie.name, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Movie.releaseDate)
+        @Html.TextBoxFor(m => m.Movie.releaseDate, "{0:d MMM yyyy}", new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Movie.genresId)
+        @Html.DropDownListFor(m => m.Movie.genresId, 
+       new SelectList(Model.Genre, "id", "name"), "Select Membership Type", new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Movie.numbeInStock)
+        @Html.TextBoxFor(m => m.Movie.numbeInStock, new { @class = "form-control" })
+    </div>
+    @Html.HiddenFor(m => m.Movie.id)
+    <button type="submit" class="btn btn-primary">Save</button>
+}

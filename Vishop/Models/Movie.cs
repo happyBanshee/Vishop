@@ -9,15 +9,25 @@ namespace Vishop.Models
     public class Movie
     {
         public int id { set; get; }
+
+        [Display(Name = "Name")]
         public string name { set; get; }
-       // [Required]
-        public Genres genre { set; get; }
-       public int genresId { set; get; }
-        [Required]
+
+        public Genres Genre { set; get; }
+
+        [Display(Name = "Genre")]
+      //  [Required]
+        public int genresId { set; get; }
+
+        //[Required]
+        [Display(Name = "Release Date")]
         public DateTime releaseDate { set; get; }
-        [Required]
+
+     //   [Required]
         public DateTime addedDate { set; get; }
-        [Required]
+
+        //[Required]
+        [Display(Name = "Number In Stock")]
         public int numbeInStock { set; get; }
     }
 }

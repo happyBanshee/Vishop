@@ -1,10 +1,10 @@
-﻿@model Vishop.ViewModels.RandomMovieViewModel
+﻿@model IEnumerable<Vishop.Models.Customer>
 @{
     ViewBag.Title = "Customers";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h2>All Customers</h2>
-@if(Model.Customer.Count == 0)
+@if(!Model.Any() )
 {
     <text>No customers yet.</text>
 } else
@@ -17,11 +17,12 @@
         </tr>
         </thead>
         <tbody>
-            @foreach(var customer in Model.Customer)
+            @foreach(var customer in Model)
             {
 
                 <tr>
-                    <td>@Html.ActionLink(@customer.name, "Details", "Customer", new { id = customer.id }, null)</td>
+                    <td>@Html.ActionLink(customer.name, "Edit", "Customer", 
+                            new { id = customer.id }, null)</td>
                     <td>@customer.membershipType.name</td>
             </tr>
             }

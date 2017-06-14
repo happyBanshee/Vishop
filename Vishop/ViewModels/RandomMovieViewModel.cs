@@ -11,6 +11,7 @@ namespace Vishop.ViewModels
     {
         public List<Movie> Movie { get; set; }
         public List<Customer> Customer { get; set; }
+        public List<Genres> Genres { get; set; }
 
     }
 }
