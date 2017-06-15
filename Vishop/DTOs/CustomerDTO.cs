@@ -20,7 +20,7 @@ namespace Vishop.DTOs
 
         public byte MembershipTypeId { set; get; }
 
-        [Min18YearsIfAMember]
+       // [Min18YearsIfAMember]
         public DateTime? Birthdate { set; get; }
     }
 }
