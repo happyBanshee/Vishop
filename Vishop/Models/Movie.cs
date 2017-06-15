@@ -8,26 +8,28 @@ namespace Vishop.Models
 {
     public class Movie
     {
-        public int id { set; get; }
-
+        public int Id { set; get; }
         [Display(Name = "Name")]
-        public string name { set; get; }
+        [Required]
+        [StringLength(255)]
+        public string Name { set; get; }
 
         public Genres Genre { set; get; }
 
         [Display(Name = "Genre")]
-      //  [Required]
-        public int genresId { set; get; }
+        [Required]
+        public int GenresId { set; get; }
 
         //[Required]
         [Display(Name = "Release Date")]
-        public DateTime releaseDate { set; get; }
+        public DateTime ReleaseDate { set; get; }
 
      //   [Required]
-        public DateTime addedDate { set; get; }
+        public DateTime AddedDate { set; get; }
 
         //[Required]
         [Display(Name = "Number In Stock")]
-        public int numbeInStock { set; get; }
+        [Range(1,20)]
+        public int NumberInStock { set; get; }
     }
 }

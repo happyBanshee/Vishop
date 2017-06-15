@@ -25,7 +25,7 @@ namespace Vishop.Controllers
 
         private List<Customer> getCustomers()
         {
-            var customersList = _context.Customers.Include(c => c.membershipType).ToList();
+            var customersList = _context.Customers.Include(c => c.MembershipType).ToList();
 
             return customersList;
         }
@@ -44,14 +44,14 @@ namespace Vishop.Controllers
         [Route("customer/details/{id}")]
         public ActionResult Details(int id)
         {
-            var customer = getCustomers().SingleOrDefault(c => c.id == id);
+            var customer = getCustomers().SingleOrDefault(c => c.Id == id);
 
             return View(customer);
         }
 
         public ActionResult Edit(int id)
         {
-            var customer = _context.Customers.SingleOrDefault(c => c.id == id);
+            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
 
             if(customer == null)
             {
@@ -69,28 +69,40 @@ namespace Vishop.Controllers
         public ActionResult New()
         {
             var membershipTypes = _context.MembershipType.ToList();
-            var viewModel = new CustomerFormViewModel { MembershipType = membershipTypes };
+            var viewModel = new CustomerFormViewModel {
+                Customer = new Customer(),
+                MembershipType = membershipTypes };
             return View("CustomerForm", viewModel);
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Customer customer)
         {
-            if(customer.id == 0)
+
+            if(!ModelState.IsValid)
+            {
+                var viewModel = new CustomerFormViewModel {
+                    Customer = customer,
+                    MembershipType = _context.MembershipType.ToList()
+                };
+                return View("CustomerForm", viewModel);
+            };
+
+            if(customer.Id == 0)
             {
                 // add it ti db context. In the memory, not in DB
                 _context.Customers.Add(customer);
             } else
             {
                 // Single returns exception if ID is not found in DB
-                var customerInDb = _context.Customers.Single(c => c.id == customer.id);
-                //TryUpdateModel(customerInDb);
+                var customerInDb = _context.Customers.Single(c => c.Id == customer.Id);
                 // AutoMapper library to map all fields automaticaly
 
-                customerInDb.name = customer.name;
-                customerInDb.birthdate = customer.birthdate;
-                customerInDb.membershipTypeId = customer.membershipTypeId;
-                customerInDb.isSubscribedToNewsletter = customer.isSubscribedToNewsletter;
+                customerInDb.Name = customer.Name;
+                customerInDb.Birthdate = customer.Birthdate;
+                customerInDb.MembershipTypeId = customer.MembershipTypeId;
+                customerInDb.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;
             }
 
             // based on modification sql request will be created to the run onto DB

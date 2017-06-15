@@ -7,7 +7,7 @@ namespace Vishop.Models
 {
     public class Genres
     {
-        public int id { set; get; }
-        public string name { set; get; }
+        public int Id { set; get; }
+        public string Name { set; get; }
     }
 }

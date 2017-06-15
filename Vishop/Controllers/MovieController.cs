@@ -40,7 +40,7 @@ namespace Vishop.Controllers
         [Route("movie/details/{id}")]
         public ActionResult Details(int id)
         {
-            var movie = _context.Movies.Include(m => m.Genre).SingleOrDefault(c => c.id == id);
+            var movie = _context.Movies.Include(m => m.Genre).SingleOrDefault(c => c.Id == id);
 
             return View(movie);
         }
@@ -48,15 +48,15 @@ namespace Vishop.Controllers
 
         public ActionResult Edit(int id)
         {
-            var movie = _context.Movies.SingleOrDefault(m => m.id == id);
+            var movie = _context.Movies.SingleOrDefault(m => m.Id == id);
 
             if(movie == null)
             {
                 return HttpNotFound();
             }
 
-            var viewModel = new MovieViewModel() {
-                Movie = movie,
+            var viewModel = new MovieViewModel(movie) {
+               
                 Genre = _context.Genres.ToList()
             };
 
@@ -66,26 +66,38 @@ namespace Vishop.Controllers
         public ActionResult New()
         {
             var genres = _context.Genres.ToList();
-            var viewModel = new MovieViewModel() { Genre = genres };
+            var viewModel = new MovieViewModel() {
+                Genre = genres
+            };
 
             return View("MovieForm", viewModel);
         }
 
         [HttpPost]
-        public ActionResult Save(MovieViewModel mov)
+        [ValidateAntiForgeryToken]
+        public ActionResult Save(Movie mov)
         {
-            if(mov.Movie.id == 0)
+            if(!ModelState.IsValid)
             {
-                mov.Movie.addedDate = DateTime.Now;
-                _context.Movies.Add(mov.Movie);
+                var viewModel = new MovieViewModel(mov) {
+                    
+                    Genre = _context.Genres.ToList()
+                };
+                return View("MovieForm", viewModel);
+            }
+
+            if(mov.Id == 0)
+            {
+                mov.AddedDate = DateTime.Now;
+                _context.Movies.Add(mov);
             } else
             {
-                var movieInDb = _context.Movies.Single(m => m.id == mov.Movie.id);
+                var movieInDb = _context.Movies.Single(m => m.Id == mov.Id);
 
-                movieInDb.name = mov.Movie.name;
-                movieInDb.releaseDate = mov.Movie.releaseDate;
-                movieInDb.genresId = mov.Movie.genresId;
-                movieInDb.numbeInStock = mov.Movie.numbeInStock;
+                movieInDb.Name = mov.Name;
+                movieInDb.ReleaseDate = mov.ReleaseDate;
+                movieInDb.GenresId = mov.GenresId;
+                movieInDb.NumberInStock = mov.NumberInStock;
             }
 
             try

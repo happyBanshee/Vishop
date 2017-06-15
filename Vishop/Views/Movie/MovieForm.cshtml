@@ -7,23 +7,33 @@
 <h2>@Model.Title</h2>
 @using(Html.BeginForm("Save", "Movie"))
 {
+    @Html.ValidationSummary()
     <div class="form-group">
-        @Html.LabelFor(m => m.Movie.name)
-        @Html.TextBoxFor(m => m.Movie.name, new { @class = "form-control" })
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m=>m.Name)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Movie.releaseDate)
-        @Html.TextBoxFor(m => m.Movie.releaseDate, "{0:d MMM yyyy}", new { @class = "form-control" })
+        @Html.LabelFor(m => m.ReleaseDate)
+        @Html.TextBoxFor(m => m.ReleaseDate, "{0:d MMM yyyy}", new { @class = "form-control" })
+    @Html.ValidationMessageFor(m=>m.ReleaseDate)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Movie.genresId)
-        @Html.DropDownListFor(m => m.Movie.genresId, 
-       new SelectList(Model.Genre, "id", "name"), "Select Membership Type", new { @class = "form-control" })
+        @Html.LabelFor(m => m.GenresId)
+        @Html.DropDownListFor(m => m.GenresId,
+       new SelectList(Model.Genre, "id", "name"), "Select Genre", new { @class = "form-control" })
+    @Html.ValidationMessageFor(m=>m.GenresId)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Movie.numbeInStock)
-        @Html.TextBoxFor(m => m.Movie.numbeInStock, new { @class = "form-control" })
+        @Html.LabelFor(m => m.NumberInStock)
+        @Html.TextBoxFor(m => m.NumberInStock, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m=>m.NumberInStock)
     </div>
-    @Html.HiddenFor(m => m.Movie.id)
+    @Html.HiddenFor(m => m.Id)
+    @Html.AntiForgeryToken()
     <button type="submit" class="btn btn-primary">Save</button>
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval");
 }

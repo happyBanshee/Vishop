@@ -7,12 +7,14 @@ namespace Vishop.Models
 {
     public class MembershipType
     {
-        public byte id { get; set; }
-        public short signupFee { get; set; }
-        public byte durationMonths { get; set; }
-        public byte discountRate { get; set; }
-        public string name { get; set; }
+        public byte Id { get; set; }
+        public short SignupFee { get; set; }
+        public byte DurationMonths { get; set; }
+        public byte DiscountRate { get; set; }
+        public string Name { get; set; }
 
+        public static readonly byte Unknown = 0;
+        public static readonly byte PayAsYouGo = 1;
     }
         
 }
