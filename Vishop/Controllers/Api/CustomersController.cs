@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
+using System.Data.Entity;
 using System.Web.Http;
 using Vishop.Models;
 using Vishop.DTOs;
@@ -22,7 +22,9 @@ namespace Vishop.Controllers.Api
         // GET /api/customers
         public IEnumerable<CustomerDTO> GetCustomers()
         {
-            return _context.Customers.ToList().Select(Mapper.Map<Customer, CustomerDTO>);
+            return _context.Customers
+                .Include(c => c.MembershipType)
+                .ToList().Select(Mapper.Map<Customer, CustomerDTO>);
         }
 
         //GET /api/customers/1

@@ -15,6 +15,7 @@ namespace Vishop.DTOs
 
         [Required]
         public int GenresId { set; get; }
+        public GenreDTO Genre { get; set; }
 
         public DateTime ReleaseDate { set; get; }
 

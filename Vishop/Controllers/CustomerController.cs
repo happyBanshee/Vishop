@@ -31,13 +31,9 @@ namespace Vishop.Controllers
         }
 
         // GET: Customer
-        public ActionResult AllCustomers()
+        public ActionResult Index()
         {
-            //var viewModel = new RandomMovieViewModel {
-            //    Customer = getCustomers()
-            //};
-
-            return View(getCustomers());
+            return View();
         }
 
 
@@ -109,7 +105,7 @@ namespace Vishop.Controllers
             _context.SaveChanges();
 
             // redirect user to the list of customers
-            return RedirectToAction("AllCustomers", "Customer");
+            return RedirectToAction("Index", "Customer");
         }
     }
 }

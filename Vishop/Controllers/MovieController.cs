@@ -20,22 +20,21 @@ namespace Vishop.Controllers
         {
             _context = new ApplicationDbContext();
         }
-                protected override void Dispose(bool disposing)
+        protected override void Dispose(bool disposing)
         {
             _context.Dispose();
         }
 
-        public ActionResult AllMovies()
+        public ActionResult Index()
         {
-            List<Movie> movie = _context.Movies.Include(c => c.Genre).ToList();
+            // List<Movie> movie = _context.Movies.Include(c => c.Genre).ToList();
 
-            //var viewModel = new RandomMovieViewModel {
-            //    Movie = movie,
-            //    Genres = _context.Genres.Include(c=>c.name).ToList()
-               
-            //};
+            if(User.IsInRole(RoleName.CanManageMovies))
+                //return View(movie);
+                return View("List");
 
-            return View(movie);
+
+            return View("ReadOnlyList");
         }
         [Route("movie/details/{id}")]
         public ActionResult Details(int id)
@@ -45,7 +44,7 @@ namespace Vishop.Controllers
             return View(movie);
         }
 
-
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult Edit(int id)
         {
             var movie = _context.Movies.SingleOrDefault(m => m.Id == id);
@@ -56,13 +55,14 @@ namespace Vishop.Controllers
             }
 
             var viewModel = new MovieViewModel(movie) {
-               
+
                 Genre = _context.Genres.ToList()
             };
 
             return View("MovieForm", viewModel);
         }
 
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult New()
         {
             var genres = _context.Genres.ToList();
@@ -75,12 +75,13 @@ namespace Vishop.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult Save(Movie mov)
         {
             if(!ModelState.IsValid)
             {
                 var viewModel = new MovieViewModel(mov) {
-                    
+
                     Genre = _context.Genres.ToList()
                 };
                 return View("MovieForm", viewModel);

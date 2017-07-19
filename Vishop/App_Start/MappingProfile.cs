@@ -15,6 +15,8 @@ namespace Vishop.App_Start
             Mapper.CreateMap<CustomerDTO, Customer>().ForMember(c => c.Id, opt => opt.Ignore());
             Mapper.CreateMap<Movie, MovieDTO>();
             Mapper.CreateMap<MovieDTO, Movie>().ForMember(m => m.Id, opt => opt.Ignore());
+            Mapper.CreateMap<Genres, GenreDTO>();
+            Mapper.CreateMap<MembershipType, MembershipTypeDTO>();
         }
     }
 }

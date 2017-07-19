@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
+using System.Data.Entity;
 using System.Web.Http;
 using Vishop.Models;
 using Vishop.DTOs;
@@ -20,12 +20,16 @@ namespace Vishop.Controllers.Api
         }
 
         // GET /api/movies/
-        public IEnumerable<MovieDTO> GetMovies()
+                public IEnumerable<MovieDTO> GetMovies()
         {
-            return _context.Movies.ToList().Select(Mapper.Map<Movie, MovieDTO>);
+            return _context.Movies
+                .Include(m => m.Genre)
+                .ToList()
+                .Select(Mapper.Map<Movie, MovieDTO>);
         }
 
         // GET /api/movies/1
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public IHttpActionResult GetMovie(int id)
         {
             var movie = _context.Movies.SingleOrDefault(m => m.Id == id);
@@ -38,6 +42,7 @@ namespace Vishop.Controllers.Api
 
         // POST /api/movies/
         [HttpPost]
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public IHttpActionResult CreateMovie(MovieDTO movieDTO)
         {
             if(!ModelState.IsValid)
@@ -56,6 +61,7 @@ namespace Vishop.Controllers.Api
 
         // PUT /api/movies/1
         [HttpPut]
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public IHttpActionResult UpdateMovie(int id, MovieDTO movieDTO) {
             if(!ModelState.IsValid)
             {
@@ -79,15 +85,16 @@ namespace Vishop.Controllers.Api
 
         // DELETE /api/movies/1
         [HttpDelete]
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public void DeleteMovie(int id) {
-            var movieInDb = _context.Customers.SingleOrDefault(m => m.Id == id);
+            var movieInDb = _context.Movies.SingleOrDefault(m => m.Id == id);
 
             if(movieInDb == null)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
 
-            _context.Customers.Remove(movieInDb);
+            _context.Movies.Remove(movieInDb);
             _context.SaveChanges();
         }
 

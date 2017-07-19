@@ -19,6 +19,7 @@ namespace Vishop.DTOs
         public bool IsSubscribedToNewsletter { set; get; }
 
         public byte MembershipTypeId { set; get; }
+        public MembershipTypeDTO MembershipType { set; get; }
 
        // [Min18YearsIfAMember]
         public DateTime? Birthdate { set; get; }
